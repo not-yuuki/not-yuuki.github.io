@@ -1,88 +1,250 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday!</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, [Enter Name]!</title>
 
-  <!-- Tailwind -->
+  <!-- This script pulls in Tailwind CSS for styling -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- AOS -->
+  <!-- These are for the animations -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-  <!-- Fonts -->
+  <!-- Google Fonts for the Anime look -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
+  <!-- Link to your external CSS file -->
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
+<!-- Canvas for the falling cherry blossoms -->
 <canvas id="sakura-canvas"></canvas>
 
-<!-- HERO -->
-<header class="h-screen relative flex items-center justify-center text-white overflow-hidden">
-  
-  <!-- BACKGROUND VIDEO OR IMAGE -->
-  <div class="absolute inset-0 hero-bg"></div>
-  <div class="absolute inset-0 bg-black/50"></div>
-
-  <div class="text-center z-10 p-4" data-aos="fade-in">
-    <h1 class="text-5xl md:text-7xl font-anime drop-shadow-lg">
-      Happy Birthday,🌸
-    </h1>
-    <p class="mt-4 text-xl font-semibold">
-      Celebrating every second of your beautiful journey
-    </p>
-    <div id="countdown" class="mt-6 text-2xl font-semibold"></div>
-  </div>
-</header>
-
-<main class="container mx-auto p-6 md:p-12">
-
-  <!-- LETTER -->
-  <section class="my-20 max-w-3xl mx-auto text-center" data-aos="fade-up">
-    <h2 class="text-4xl font-anime text-sakura mb-8">
-      A Special Message For You
-    </h2>
-
-    <div class="bg-white/90 backdrop-blur-md p-8 rounded-xl shadow-xl text-left space-y-4">
-      <p>Hey,</p>
-      <p>
-        Wish you the happiest birthday ever ✨  
-        May your life be filled with warmth, pets, manga moments,
-        and endless reasons to smile.
-      </p>
-      <p>
-        You are kindness, strength, and authenticity all in one.
-        The world is brighter because of you.
-      </p>
-      <p class="text-right mt-6">
-        With love 💖
-      </p>
+<!-- Gift Box Opening Screen -->
+<div id="gift-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-purple-900 via-pink-800 to-red-900 cursor-pointer">
+  <div class="text-center">
+    <h2 class="text-4xl md:text-6xl font-anime text-white mb-8 animate-pulse">You have a surprise! 🎁</h2>
+    <div id="gift-box" class="transform transition-transform hover:scale-110">
+      <!-- Gift Box SVG -->
+      <svg width="200" height="200" viewBox="0 0 200 200" class="mx-auto">
+        <!-- Box Body -->
+        <rect id="box-body" x="40" y="80" width="120" height="100" fill="#FF6B9D" stroke="#fff" stroke-width="3"/>
+        <!-- Box Lid -->
+        <g id="box-lid">
+          <rect x="35" y="60" width="130" height="30" fill="#FFB7C5" stroke="#fff" stroke-width="3"/>
+          <ellipse cx="100" cy="60" rx="65" ry="15" fill="#FFB7C5" stroke="#fff" stroke-width="3"/>
+        </g>
+        <!-- Ribbon Vertical -->
+        <rect x="95" y="60" width="10" height="120" fill="#FFD700" stroke="#fff" stroke-width="2"/>
+        <!-- Ribbon Horizontal -->
+        <rect x="35" y="105" width="130" height="10" fill="#FFD700" stroke="#fff" stroke-width="2"/>
+        <!-- Bow -->
+        <g id="bow">
+          <ellipse cx="80" cy="55" rx="20" ry="15" fill="#FFD700" stroke="#fff" stroke-width="2"/>
+          <ellipse cx="120" cy="55" rx="20" ry="15" fill="#FFD700" stroke="#fff" stroke-width="2"/>
+          <circle cx="100" cy="55" r="8" fill="#FFD700" stroke="#fff" stroke-width="2"/>
+        </g>
+      </svg>
     </div>
-  </section>
+    <p class="text-xl text-white mt-6 font-semibold animate-bounce">👆 Click anywhere to open! 👆</p>
+  </div>
+</div>
 
-  <!-- FINALE -->
-  <section class="my-24 text-center" data-aos="fade-up">
-    <h2 class="text-4xl font-anime mb-4">
-      Stay amazing, always 🌸
-    </h2>
-    <p class="text-lg opacity-80">
-      This page was made with love — just for you.
-    </p>
-  </section>
+<!-- Main Website Content (Hidden Initially) -->
+<div id="main-content" class="hidden">
 
-</main>
+  <!-- Section 1: Birthday Cake Hero with Custom Background -->
+  <header class="h-screen relative flex items-center justify-center text-white overflow-hidden">
+    <!-- Background Image (you can replace this with your own image) -->
+    <div id="hero-background" class="absolute top-0 left-0 w-full h-full bg-cover bg-center z-[-1]" 
+         style="background-image: url('img/background.jpg');"></div>
+    
+    <!-- Dark Overlay for better text visibility -->
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
 
-<footer class="bg-navy text-white p-6 text-center">
-  <p>Enjoy your day to the fullest ✨</p>
-</footer>
+    <div class="text-center z-10 p-4" data-aos="zoom-in" data-aos-duration="1500">
+      <!-- Birthday Cake SVG -->
+      <div class="mb-8">
+        <svg width="300" height="300" viewBox="0 0 300 300" class="mx-auto animate-bounce-slow">
+          <!-- Cake Base Layer -->
+          <ellipse cx="150" cy="250" rx="100" ry="20" fill="#8B4513"/>
+          <rect x="50" y="200" width="200" height="50" fill="#D2691E" stroke="#8B4513" stroke-width="3"/>
+          
+          <!-- Cake Middle Layer -->
+          <ellipse cx="150" cy="200" rx="100" ry="20" fill="#8B4513"/>
+          <rect x="60" y="150" width="180" height="50" fill="#FF69B4" stroke="#C71585" stroke-width="3"/>
+          
+          <!-- Cake Top Layer -->
+          <ellipse cx="150" cy="150" rx="90" ry="18" fill="#C71585"/>
+          <rect x="70" y="110" width="160" height="40" fill="#FFB6C1" stroke="#FF69B4" stroke-width="3"/>
+          <ellipse cx="150" cy="110" rx="80" ry="16" fill="#FF69B4"/>
+          
+          <!-- Frosting Decorations -->
+          <circle cx="90" cy="175" r="8" fill="#FFF" opacity="0.8"/>
+          <circle cx="120" cy="175" r="8" fill="#FFF" opacity="0.8"/>
+          <circle cx="150" cy="175" r="8" fill="#FFF" opacity="0.8"/>
+          <circle cx="180" cy="175" r="8" fill="#FFF" opacity="0.8"/>
+          <circle cx="210" cy="175" r="8" fill="#FFF" opacity="0.8"/>
+          
+          <!-- Candles -->
+          <rect x="110" y="80" width="8" height="30" fill="#FFD700" stroke="#FFA500" stroke-width="2"/>
+          <rect x="145" y="75" width="8" height="35" fill="#FFD700" stroke="#FFA500" stroke-width="2"/>
+          <rect x="180" y="80" width="8" height="30" fill="#FFD700" stroke="#FFA500" stroke-width="2"/>
+          
+          <!-- Flames -->
+          <ellipse id="flame1" cx="114" cy="75" rx="6" ry="10" fill="#FF6347" opacity="0.9" class="flame-flicker"/>
+          <ellipse id="flame2" cx="149" cy="70" rx="6" ry="10" fill="#FF6347" opacity="0.9" class="flame-flicker"/>
+          <ellipse id="flame3" cx="184" cy="75" rx="6" ry="10" fill="#FF6347" opacity="0.9" class="flame-flicker"/>
+        </svg>
+      </div>
+      
+      <h1 class="text-5xl md:text-7xl font-anime drop-shadow-lg mb-4">Happy Birthday, [Enter Name]!</h1>
+      <p class="mt-4 text-2xl font-semibold">🎉 Celebrating Another Amazing Year! 🎉</p>
+      <div id="countdown" class="mt-6 text-2xl font-semibold tracking-widest leading-relaxed"></div>
+    </div>
+  </header>
 
+  <!-- Main Content -->
+  <main class="container mx-auto p-6 md:p-12">
+
+    <!-- Section 2: A Letter For You -->
+    <section class="my-16 md:my-24 max-w-3xl mx-auto text-center" data-aos="fade-up">
+      <h2 class="text-4xl md:text-5xl font-anime text-sakura mb-8 drop-shadow-sm">A Special Message For You</h2>
+      <div class="text-left text-lg leading-relaxed space-y-4 bg-white p-8 rounded-lg shadow-lg">
+        <!-- TODO: Write your personal letter here -->
+        <p>Hey [Enter Name],</p>
+        <p>Your personalized birthday message goes here! Make it heartfelt, funny, or both - whatever matches your friendship!</p>
+        <p>Add more paragraphs as needed to express your feelings and share memories.</p>
+        <p class="text-right mt-8">
+          With love,<br>
+          [Your Name]
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 3: Character Wishes Timeline -->
+    <section class="my-16 md:my-24">
+      <h2 class="text-4xl md:text-5xl font-anime text-center mb-12 text-sakura" data-aos="fade-up">
+        🌟 Birthday Wishes from Your Favorite Characters 🌟
+      </h2>
+      <div class="space-y-20">
+        
+        <!-- Character 1 -->
+        <div class="flex flex-col md:flex-row items-center gap-8" data-aos="fade-right" data-aos-duration="1000">
+          <div class="w-full md:w-1/2 relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+            <img src="img/character1.png" alt="Character 1" class="relative w-full h-96 object-cover rounded-lg shadow-2xl transform group-hover:scale-105 transition duration-300">
+          </div>
+          <div class="w-full md:w-1/2 text-center md:text-left">
+            <h3 class="text-3xl font-anime text-sakura mb-4">[Character Name]</h3>
+            <div class="bg-white p-6 rounded-lg shadow-xl relative">
+              <div class="absolute -left-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-white"></div>
+              <p class="text-xl italic">"[Add character's birthday wish here - what would this character say to your friend?]"</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Character 2 -->
+        <div class="flex flex-col md:flex-row-reverse items-center gap-8" data-aos="fade-left" data-aos-duration="1000">
+          <div class="w-full md:w-1/2 relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+            <img src="img/character2.png" alt="Character 2" class="relative w-full h-96 object-cover rounded-lg shadow-2xl transform group-hover:scale-105 transition duration-300">
+          </div>
+          <div class="w-full md:w-1/2 text-center md:text-right">
+            <h3 class="text-3xl font-anime text-sakura mb-4">[Character Name]</h3>
+            <div class="bg-white p-6 rounded-lg shadow-xl relative">
+              <div class="absolute -right-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white"></div>
+              <p class="text-xl italic">"[Add character's birthday wish here]"</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Character 3 -->
+        <div class="flex flex-col md:flex-row items-center gap-8" data-aos="fade-right" data-aos-duration="1000">
+          <div class="w-full md:w-1/2 relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-orange-500 to-red-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+            <img src="img/character3.png" alt="Character 3" class="relative w-full h-96 object-cover rounded-lg shadow-2xl transform group-hover:scale-105 transition duration-300">
+          </div>
+          <div class="w-full md:w-1/2 text-center md:text-left">
+            <h3 class="text-3xl font-anime text-sakura mb-4">[Character Name]</h3>
+            <div class="bg-white p-6 rounded-lg shadow-xl relative">
+              <div class="absolute -left-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-white"></div>
+              <p class="text-xl italic">"[Add character's birthday wish here]"</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Character 4 -->
+        <div class="flex flex-col md:flex-row-reverse items-center gap-8" data-aos="fade-left" data-aos-duration="1000">
+          <div class="w-full md:w-1/2 relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-green-500 to-teal-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+            <img src="img/character4.png" alt="Character 4" class="relative w-full h-96 object-cover rounded-lg shadow-2xl transform group-hover:scale-105 transition duration-300">
+          </div>
+          <div class="w-full md:w-1/2 text-center md:text-right">
+            <h3 class="text-3xl font-anime text-sakura mb-4">[Character Name]</h3>
+            <div class="bg-white p-6 rounded-lg shadow-xl relative">
+              <div class="absolute -right-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white"></div>
+              <p class="text-xl italic">"[Add character's birthday wish here]"</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Character 5 -->
+        <div class="flex flex-col md:flex-row items-center gap-8" data-aos="fade-right" data-aos-duration="1000">
+          <div class="w-full md:w-1/2 relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+            <img src="img/character5.png" alt="Character 5" class="relative w-full h-96 object-cover rounded-lg shadow-2xl transform group-hover:scale-105 transition duration-300">
+          </div>
+          <div class="w-full md:w-1/2 text-center md:text-left">
+            <h3 class="text-3xl font-anime text-sakura mb-4">[Character Name]</h3>
+            <div class="bg-white p-6 rounded-lg shadow-xl relative">
+              <div class="absolute -left-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-white"></div>
+              <p class="text-xl italic">"[Add character's birthday wish here]"</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Character 6 -->
+        <div class="flex flex-col md:flex-row-reverse items-center gap-8" data-aos="fade-left" data-aos-duration="1000">
+          <div class="w-full md:w-1/2 relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+            <img src="img/character6.png" alt="Character 6" class="relative w-full h-96 object-cover rounded-lg shadow-2xl transform group-hover:scale-105 transition duration-300">
+          </div>
+          <div class="w-full md:w-1/2 text-center md:text-right">
+            <h3 class="text-3xl font-anime text-sakura mb-4">[Character Name]</h3>
+            <div class="bg-white p-6 rounded-lg shadow-xl relative">
+              <div class="absolute -right-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white"></div>
+              <p class="text-xl italic">"[Add character's birthday wish here]"</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Final Section -->
+    <section class="my-16 md:my-24 text-center" data-aos="fade-up">
+      <h2 class="text-4xl md:text-5xl font-anime text-sakura mb-8">Make This Year Legendary! 🌟</h2>
+      <p class="text-2xl">Wishing you all the adventures, happiness, and amazing moments ahead!</p>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-navy text-white p-8 text-center">
+    <p class="text-xl">Enjoy your day to the fullest! 🎂✨</p>
+    <p class="text-sm opacity-70 mt-2">Made with ❤️ for an amazing friend</p>
+  </footer>
+
+</div>
+
+<!-- These scripts are for the animations -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<!-- Link to your external JavaScript file -->
 <script src="script.js"></script>
 </body>
 </html>
