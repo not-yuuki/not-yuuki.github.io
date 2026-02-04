@@ -1,7 +1,106 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+    // --- Gift Box Opening Animation ---
+    const giftScreen = document.getElementById('gift-screen');
+    const giftBox = document.getElementById('gift-box');
+    const mainContent = document.getElementById('main-content');
+    const boxLid = document.getElementById('box-lid');
+    const bow = document.getElementById('bow');
+
+    // Make entire screen clickable as backup
+    giftScreen.addEventListener('click', function() {
+        openGift();
+    });
+
+    function openGift() {
+        // Prevent multiple clicks
+        giftScreen.style.pointerEvents = 'none';
+        // Animate the bow flying off
+        bow.style.transition = 'all 0.8s ease-out';
+        bow.style.transform = 'translate(50px, -100px) rotate(180deg)';
+        bow.style.opacity = '0';
+
+        // Animate the lid opening
+        setTimeout(() => {
+            boxLid.style.transition = 'all 1s ease-out';
+            boxLid.style.transform = 'translateY(-80px) rotateX(45deg)';
+            boxLid.style.opacity = '0.3';
+        }, 400);
+
+        // Create confetti explosion
+        setTimeout(() => {
+            createConfetti();
+        }, 800);
+
+        // Fade out gift screen and show main content
+        setTimeout(() => {
+            giftScreen.style.transition = 'opacity 1s ease-out';
+            giftScreen.style.opacity = '0';
+            
+            setTimeout(() => {
+                giftScreen.style.display = 'none';
+                mainContent.classList.remove('hidden');
+                mainContent.style.opacity = '0';
+                mainContent.style.transition = 'opacity 1.5s ease-in';
+                
+                setTimeout(() => {
+                    mainContent.style.opacity = '1';
+                }, 50);
+            }, 1000);
+        }, 1800);
+    }
+
+    // --- Confetti Animation ---
+    function createConfetti() {
+        const colors = ['#FFB7C5', '#FFD700', '#FF69B4', '#87CEEB', '#98FB98', '#DDA0DD'];
+        const confettiCount = 100;
+
+        for (let i = 0; i < confettiCount; i++) {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.width = '10px';
+            confetti.style.height = '10px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = '50%';
+            confetti.style.top = '50%';
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
+            confetti.style.zIndex = '9999';
+            confetti.style.pointerEvents = 'none';
+            
+            document.body.appendChild(confetti);
+
+            const angle = (Math.PI * 2 * i) / confettiCount;
+            const velocity = 200 + Math.random() * 200;
+            const xVelocity = Math.cos(angle) * velocity;
+            const yVelocity = Math.sin(angle) * velocity;
+
+            let posX = 0;
+            let posY = 0;
+            let rotation = 0;
+            let opacity = 1;
+
+            const animate = () => {
+                posX += xVelocity * 0.016;
+                posY += yVelocity * 0.016 + (9.8 * 0.016 * 10);
+                rotation += 5;
+                opacity -= 0.01;
+
+                confetti.style.transform = `translate(${posX}px, ${posY}px) rotate(${rotation}deg)`;
+                confetti.style.opacity = opacity;
+
+                if (opacity > 0) {
+                    requestAnimationFrame(animate);
+                } else {
+                    confetti.remove();
+                }
+            };
+
+            requestAnimationFrame(animate);
+        }
+    }
+
     // --- Live Age Counter ---
-    const birthDate = new Date('2006-08-14T00:00:00');
+    const birthDate = new Date('2006-08-14T00:00:00'); // TODO: Update this with your friend's birthday
     const countdownElement = document.getElementById('countdown');
 
     function updateAge() {
@@ -31,54 +130,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Initialize AOS (Animate on Scroll) ---
     AOS.init({
-        duration: 800,
+        duration: 1000,
         once: true,
+        offset: 100,
+        easing: 'ease-out-cubic'
     });
-
-    // --- Initialize LightGallery ---
-    lightGallery(document.getElementById('lightgallery'), {
-        speed: 500,
-        download: false
-    });
-
-    // --- Hall of Fame Scroller ---
-    const scroller = document.getElementById('hall-of-fame-scroller');
-    const scrollLeftBtn = document.getElementById('scroll-left-btn');
-    const scrollRightBtn = document.getElementById('scroll-right-btn');
-    if (scroller && scrollLeftBtn && scrollRightBtn) {
-        const card = scroller.querySelector('.snap-center');
-        const cardWidth = card.offsetWidth + parseInt(getComputedStyle(card.parentElement).gap);
-
-        scrollRightBtn.addEventListener('click', () => {
-            scroller.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        });
-        scrollLeftBtn.addEventListener('click', () => {
-            scroller.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-        });
-    }
-
-    // --- Video Uploader ---
-    const videoUploadInput = document.getElementById('video-upload');
-    const videoPlayer = document.getElementById('video-player');
-    const videoUploadLabel = document.getElementById('video-upload-label');
-
-    if(videoUploadInput && videoPlayer && videoUploadLabel) {
-        videoUploadLabel.addEventListener('click', () => {
-            videoUploadInput.click();
-        });
-
-        videoUploadInput.addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                const videoURL = URL.createObjectURL(file);
-                videoPlayer.src = videoURL;
-                videoPlayer.classList.remove('hidden');
-                videoUploadLabel.classList.add('hidden');
-                videoPlayer.play();
-            }
-        });
-    }
-
 
     // --- Sakura Petal Animation ---
     const canvas = document.getElementById('sakura-canvas');
@@ -149,4 +205,13 @@ document.addEventListener('DOMContentLoaded', function() {
         createPetals();
         animate();
     }
+
+    // --- Smooth Scroll Reveal Effect ---
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallax = document.getElementById('hero-background');
+        if (parallax) {
+            parallax.style.transform = 'translateY(' + scrolled * 0.5 + 'px)';
+        }
+    });
 });
