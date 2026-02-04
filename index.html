@@ -5,64 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday, [Enter Name]!</title>
 
-  <!-- This script pulls in Tailwind CSS for styling -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- These are for the animations -->
+  <!-- AOS Animation Library -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-  <!-- Google Fonts for the Anime look -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Link to your external CSS file -->
+  <!-- External CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Canvas for the falling cherry blossoms -->
-<canvas id="sakura-canvas"></canvas>
-
-<!-- Gift Box Opening Screen -->
-<div id="gift-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-purple-900 via-pink-800 to-red-900 cursor-pointer">
-  <div class="text-center">
-    <h2 class="text-4xl md:text-6xl font-anime text-white mb-8 animate-pulse">You have a surprise! 🎁</h2>
-    <div id="gift-box" class="transform transition-transform hover:scale-110">
-      <!-- Gift Box SVG -->
-      <svg width="200" height="200" viewBox="0 0 200 200" class="mx-auto">
-        <!-- Box Body -->
-        <rect id="box-body" x="40" y="80" width="120" height="100" fill="#FF6B9D" stroke="#fff" stroke-width="3"/>
-        <!-- Box Lid -->
-        <g id="box-lid">
-          <rect x="35" y="60" width="130" height="30" fill="#FFB7C5" stroke="#fff" stroke-width="3"/>
-          <ellipse cx="100" cy="60" rx="65" ry="15" fill="#FFB7C5" stroke="#fff" stroke-width="3"/>
-        </g>
-        <!-- Ribbon Vertical -->
-        <rect x="95" y="60" width="10" height="120" fill="#FFD700" stroke="#fff" stroke-width="2"/>
-        <!-- Ribbon Horizontal -->
-        <rect x="35" y="105" width="130" height="10" fill="#FFD700" stroke="#fff" stroke-width="2"/>
-        <!-- Bow -->
-        <g id="bow">
-          <ellipse cx="80" cy="55" rx="20" ry="15" fill="#FFD700" stroke="#fff" stroke-width="2"/>
-          <ellipse cx="120" cy="55" rx="20" ry="15" fill="#FFD700" stroke="#fff" stroke-width="2"/>
-          <circle cx="100" cy="55" r="8" fill="#FFD700" stroke="#fff" stroke-width="2"/>
-        </g>
-      </svg>
-    </div>
-    <p class="text-xl text-white mt-6 font-semibold animate-bounce">👆 Click anywhere to open! 👆</p>
-  </div>
-</div>
-
-<!-- Main Website Content (Hidden Initially) -->
-<div id="main-content" class="hidden">
 
   <!-- Section 1: Birthday Cake Hero with Custom Background -->
   <header class="h-screen relative flex items-center justify-center text-white overflow-hidden">
-    <!-- Background Image (you can replace this with your own image) -->
+    <!-- Background Image (replace with your own) -->
     <div id="hero-background" class="absolute top-0 left-0 w-full h-full bg-cover bg-center z-[-1]" 
          style="background-image: url('img/background.jpg');"></div>
     
-    <!-- Dark Overlay for better text visibility -->
+    <!-- Dark Overlay -->
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
 
     <div class="text-center z-10 p-4" data-aos="zoom-in" data-aos-duration="1500">
@@ -95,9 +60,9 @@
           <rect x="180" y="80" width="8" height="30" fill="#FFD700" stroke="#FFA500" stroke-width="2"/>
           
           <!-- Flames -->
-          <ellipse id="flame1" cx="114" cy="75" rx="6" ry="10" fill="#FF6347" opacity="0.9" class="flame-flicker"/>
-          <ellipse id="flame2" cx="149" cy="70" rx="6" ry="10" fill="#FF6347" opacity="0.9" class="flame-flicker"/>
-          <ellipse id="flame3" cx="184" cy="75" rx="6" ry="10" fill="#FF6347" opacity="0.9" class="flame-flicker"/>
+          <ellipse cx="114" cy="75" rx="6" ry="10" fill="#FF6347" opacity="0.9" class="flame-flicker"/>
+          <ellipse cx="149" cy="70" rx="6" ry="10" fill="#FF6347" opacity="0.9" class="flame-flicker"/>
+          <ellipse cx="184" cy="75" rx="6" ry="10" fill="#FF6347" opacity="0.9" class="flame-flicker"/>
         </svg>
       </div>
       
@@ -141,7 +106,7 @@
           <div class="w-full md:w-1/2 text-center md:text-left">
             <h3 class="text-3xl font-anime text-sakura mb-4">[Character Name]</h3>
             <div class="bg-white p-6 rounded-lg shadow-xl relative">
-              <div class="absolute -left-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-white"></div>
+              <div class="absolute -left-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-white hidden md:block"></div>
               <p class="text-xl italic">"[Add character's birthday wish here - what would this character say to your friend?]"</p>
             </div>
           </div>
@@ -156,7 +121,7 @@
           <div class="w-full md:w-1/2 text-center md:text-right">
             <h3 class="text-3xl font-anime text-sakura mb-4">[Character Name]</h3>
             <div class="bg-white p-6 rounded-lg shadow-xl relative">
-              <div class="absolute -right-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white"></div>
+              <div class="absolute -right-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white hidden md:block"></div>
               <p class="text-xl italic">"[Add character's birthday wish here]"</p>
             </div>
           </div>
@@ -171,7 +136,7 @@
           <div class="w-full md:w-1/2 text-center md:text-left">
             <h3 class="text-3xl font-anime text-sakura mb-4">[Character Name]</h3>
             <div class="bg-white p-6 rounded-lg shadow-xl relative">
-              <div class="absolute -left-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-white"></div>
+              <div class="absolute -left-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-white hidden md:block"></div>
               <p class="text-xl italic">"[Add character's birthday wish here]"</p>
             </div>
           </div>
@@ -186,7 +151,7 @@
           <div class="w-full md:w-1/2 text-center md:text-right">
             <h3 class="text-3xl font-anime text-sakura mb-4">[Character Name]</h3>
             <div class="bg-white p-6 rounded-lg shadow-xl relative">
-              <div class="absolute -right-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white"></div>
+              <div class="absolute -right-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white hidden md:block"></div>
               <p class="text-xl italic">"[Add character's birthday wish here]"</p>
             </div>
           </div>
@@ -201,7 +166,7 @@
           <div class="w-full md:w-1/2 text-center md:text-left">
             <h3 class="text-3xl font-anime text-sakura mb-4">[Character Name]</h3>
             <div class="bg-white p-6 rounded-lg shadow-xl relative">
-              <div class="absolute -left-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-white"></div>
+              <div class="absolute -left-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-white hidden md:block"></div>
               <p class="text-xl italic">"[Add character's birthday wish here]"</p>
             </div>
           </div>
@@ -216,7 +181,7 @@
           <div class="w-full md:w-1/2 text-center md:text-right">
             <h3 class="text-3xl font-anime text-sakura mb-4">[Character Name]</h3>
             <div class="bg-white p-6 rounded-lg shadow-xl relative">
-              <div class="absolute -right-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white"></div>
+              <div class="absolute -right-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white hidden md:block"></div>
               <p class="text-xl italic">"[Add character's birthday wish here]"</p>
             </div>
           </div>
@@ -239,12 +204,10 @@
     <p class="text-sm opacity-70 mt-2">Made with ❤️ for an amazing friend</p>
   </footer>
 
-</div>
+  <!-- AOS Animation Script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-<!-- These scripts are for the animations -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-<!-- Link to your external JavaScript file -->
-<script src="script.js"></script>
+  <!-- External JavaScript -->
+  <script src="script.js"></script>
 </body>
 </html>
