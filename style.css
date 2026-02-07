@@ -182,9 +182,21 @@ section {
 /* Accessibility - Focus Styles */
 button:focus,
 a:focus {
-    outline: 3px solid #8b5cf6;
-    outline-offset: 2px;
-    border-radius: 0.5rem;
+    outline: none;
+}
+
+button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.4);
+}
+
+#music-toggle:focus {
+    outline: none;
+}
+
+#music-toggle:focus-visible {
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.5);
+    transform: scale(1.1);
 }
 
 /* Smooth appearance for AOS elements */
