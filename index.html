@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday, [Enter Name]!</title>
+  <title>Happy Birthday! 🎉</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -11,163 +11,215 @@
   <!-- AOS Animation Library -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts - Better, More Modern Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Space+Grotesk:wght@400;600;700&family=Righteous&display=swap" rel="stylesheet">
 
   <!-- External CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Section 1: Birthday Cake Hero with Custom Background -->
-  <header class="h-screen relative flex items-center justify-center text-white overflow-hidden">
-    <!-- Background Image - FIXED so it doesn't scroll -->
-    <div id="hero-background" class="absolute top-0 left-0 w-full h-full bg-cover bg-center bg-fixed" 
-         style="background-image: url('https://i.imgur.com/SiUx1TP.jpeg'); background-attachment: fixed;"></div>
-    
-    <!-- Dark Overlay - reduced opacity so your image shows through -->
-    <div class="absolute inset-0 bg-black bg-opacity-25"></div>
+  <!-- Background Music Player -->
+  <div id="music-player" class="fixed top-4 right-4 z-50 bg-white/90 backdrop-blur-md p-3 rounded-full shadow-lg">
+    <button id="music-toggle" class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-purple-600 hover:text-purple-800 transition">
+      <span id="music-icon">🔇</span>
+      <span id="music-text">Play Music</span>
+    </button>
+    <audio id="background-music" loop>
+      <source src="https://YOUR_MUSIC_URL.mp3" type="audio/mpeg">
+    </audio>
+  </div>
 
-    <div class="text-center z-10 p-4" data-aos="zoom-in" data-aos-duration="1500">
-      <!-- Birthday Cake Image - paste your direct image URL in src -->
+  <!-- Section 1: Hero Section with Background -->
+  <header class="min-h-screen relative flex items-center justify-center text-white overflow-hidden py-20">
+    <!-- Background Image with Rounded Effect -->
+    <div class="absolute inset-4 md:inset-8 rounded-3xl overflow-hidden">
+      <div class="absolute inset-0 bg-cover bg-center" 
+           style="background-image: url('https://i.imgur.com/SiUx1TP.jpeg');"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
+    </div>
+
+    <div class="text-center z-10 p-4 max-w-4xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
+      <!-- Birthday Cake Image -->
       <div class="mb-8">
-        <img src="https://i.imgur.com/YOUR_CAKE_IMAGE_ID.png" alt="Birthday Cake" class="mx-auto w-64 md:w-96 animate-bounce-slow">
+        <img src="https://i.imgur.com/YOUR_CAKE_IMAGE_ID.png" alt="Birthday Cake" class="mx-auto w-48 md:w-72 animate-bounce-slow drop-shadow-2xl">
       </div>
       
-      <h1 class="text-5xl md:text-7xl font-anime drop-shadow-lg mb-4">Happy Birthday, [Enter Name]!</h1>
-      <p class="mt-4 text-2xl md:text-3xl font-semibold">🎉 Celebrating Another Amazing Year! 🎉</p>
+      <h1 class="text-6xl md:text-8xl font-display mb-6 animate-gradient-text">Happy Birthday!</h1>
+      <p class="text-xl md:text-2xl font-body font-semibold tracking-wide">🎉 Celebrating You 🎉</p>
     </div>
   </header>
 
   <!-- Main Content -->
-  <main class="container mx-auto p-6 md:p-12">
+  <main class="relative">
+    <!-- Decorative Background Pattern -->
+    <div class="fixed inset-0 -z-10 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50"></div>
+    <div class="fixed inset-0 -z-10 opacity-30" style="background-image: radial-gradient(circle at 2px 2px, rgba(139, 92, 246, 0.15) 1px, transparent 0); background-size: 40px 40px;"></div>
 
-    <!-- Section 2: A Letter For You -->
-    <section class="my-16 md:my-24 max-w-3xl mx-auto text-center" data-aos="fade-up">
-      <h2 class="text-4xl md:text-5xl font-anime text-sakura mb-8 drop-shadow-sm">A Special Message For You</h2>
-      <div class="text-left text-lg leading-relaxed space-y-4 bg-white p-8 rounded-lg shadow-lg">
-        <!-- TODO: Write your personal letter here -->
-        <p>Hey [Enter Name],</p>
-        <p>Another year older, another year of you being short, iconic, effortlessly cool, pretty, and hopelessly devoted to fictional men with unrealistic charm. Zayne and Sylus may be pixels, but the emotional impact they’ve had on you is very real — and endlessly entertaining.</p>
-        <p>Youre living life like a nocturnal legend. While the world sleeps, you’re wide awake gaming, simping, and existing on an entirely different time zone. Your sleep schedule is absolutely destroyed, but your vibe? Immaculate.</p>
-        <p>Your gaming luck is criminal. gacha pulls? blessed. RNG doesn’t even pretend to be fair around you — it just hands you wins and moves on. Built different, honestly.</p>
-        <p>But beyond the jokes, you work really hard, and that deserves way more credit than you give yourself. You balance effort, passion, and chaos in a way that somehow works — and that’s impressive.</p> 
-        <p>I’m really glad to have you as a friend. I hope today treats you well — and this year is kinder to you, gives you reasons to smile, and reminds you just how amazing you actually are. Happy Birthday — don’t change (except maybe the sleep thing… maybe).</p>
-        <p class="text-right mt-8">
-          With love,<br>
-          [Your Name]
-        </p>
-      </div>
-    </section>
+    <div class="container mx-auto px-4 md:px-8 max-w-7xl">
 
-    <!-- Section 3: Character Wishes Timeline -->
-    <section class="my-16 md:my-24">
-      <h2 class="text-4xl md:text-5xl font-anime text-center mb-12 text-sakura" data-aos="fade-up">
-        🌟 Birthday Wishes from Your Favorite Characters 🌟
-      </h2>
-      <div class="space-y-12">
+      <!-- Section 2: Letter -->
+      <section class="py-16 md:py-24" data-aos="fade-up">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-white/80 backdrop-blur-xl p-8 md:p-12 rounded-3xl shadow-2xl border border-purple-100">
+            <h2 class="text-4xl md:text-5xl font-display text-center mb-8 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              A Special Message For You ✨
+            </h2>
+            <div class="space-y-6 text-lg leading-relaxed text-gray-800 font-body">
+              <p class="first-letter:text-6xl first-letter:font-bold first-letter:text-purple-600 first-letter:mr-1 first-letter:float-left">
+                Another year older, another year of you being short, iconic, effortlessly cool, pretty, and hopelessly devoted to fictional men with unrealistic charm. Zayne and Sylus may be pixels, but the emotional impact they've had on you is very real — and endlessly entertaining.
+              </p>
+              <p>You're living life like a nocturnal legend. While the world sleeps, you're wide awake gaming, simping, and existing on an entirely different time zone. Your sleep schedule is absolutely destroyed, but your vibe? Immaculate.</p>
+              <p>Your gaming luck is criminal. Gacha pulls? Blessed. RNG doesn't even pretend to be fair around you — it just hands you wins and moves on. Built different, honestly.</p>
+              <p>But beyond the jokes, you work really hard, and that deserves way more credit than you give yourself. You balance effort, passion, and chaos in a way that somehow works — and that's impressive.</p>
+              <p>I'm really glad to have you as a friend. I hope today treats you well — and this year is kinder to you, gives you reasons to smile, and reminds you just how amazing you actually are. Happy Birthday — don't change (except maybe the sleep thing… maybe).</p>
+              <p class="text-right mt-8 font-semibold text-purple-700">
+                With love,<br>
+                [Your Name] 💜
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Character Wishes -->
+      <section class="py-16 md:py-24">
+        <h2 class="text-4xl md:text-6xl font-display text-center mb-16 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent" data-aos="fade-up">
+          🌟 Birthday Wishes from Your Favorites 🌟
+        </h2>
         
-        <!-- Character 1 -->
-        <div class="flex flex-col md:flex-row items-center gap-8" data-aos="fade-right" data-aos-duration="1000">
-          <div class="w-full md:w-5/12">
-            <img src="https://i.imgur.com/CHARACTER1_ID.png" alt="Character 1" class="w-full h-96 object-contain rounded-lg shadow-2xl transform hover:scale-105 transition duration-300">
-          </div>
-          <div class="w-full md:w-7/12 text-center md:text-left">
-            <h3 class="text-3xl font-anime text-sakura mb-4">Zayne</h3>
-            <div class="bg-white p-6 rounded-lg shadow-xl relative">
-              <div class="absolute -left-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-white hidden md:block"></div>
-              <p class="text-xl italic">“Happy Birthday. Today’s yours — no distractions, no obligations. If anyone deserves to be spoiled, it’s you. I hope you remember that.”</p>
+        <div class="space-y-16">
+          
+          <!-- Character 1 - Zayne -->
+          <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10" data-aos="fade-right">
+            <div class="w-full md:w-5/12 lg:w-4/12">
+              <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition"></div>
+                <img src="https://i.imgur.com/CHARACTER1_ID.png" alt="Zayne" class="relative w-full aspect-[3/4] object-cover rounded-2xl shadow-2xl transform group-hover:scale-[1.02] transition duration-300">
+              </div>
+            </div>
+            <div class="w-full md:w-7/12 lg:w-8/12">
+              <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-purple-100">
+                <h3 class="text-3xl md:text-4xl font-display mb-4 text-purple-700">Zayne ❄️</h3>
+                <p class="text-lg md:text-xl text-gray-700 leading-relaxed font-body italic">
+                  "After a never-ending winter, meeting you felt like spring. Even under the moonlight, your warmth lights my path. Happy birthday, my dear – whatever challenges dawn may bring, I'll never let you face them alone."
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Character 2 -->
-        <div class="flex flex-col md:flex-row-reverse items-center gap-8" data-aos="fade-left" data-aos-duration="1000">
-          <div class="w-full md:w-5/12">
-            <img src="https://i.imgur.com/CHARACTER2_ID.png" alt="Character 2" class="w-full h-96 object-contain rounded-lg shadow-2xl transform hover:scale-105 transition duration-300">
-          </div>
-          <div class="w-full md:w-7/12 text-center md:text-right">
-            <h3 class="text-3xl font-anime text-sakura mb-4">Sylus</h3>
-            <div class="bg-white p-6 rounded-lg shadow-xl relative">
-              <div class="absolute -right-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white hidden md:block"></div>
-              <p class="text-xl italic">“Happy Birthday. You’ve grown more than you realize. I see it in the way you carry yourself — steady, kind, resilient.”</p>
+          <!-- Character 2 - Sylus -->
+          <div class="flex flex-col md:flex-row-reverse items-center gap-6 md:gap-10" data-aos="fade-left">
+            <div class="w-full md:w-5/12 lg:w-4/12">
+              <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-red-600 to-purple-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition"></div>
+                <img src="https://i.imgur.com/CHARACTER2_ID.png" alt="Sylus" class="relative w-full aspect-[3/4] object-cover rounded-2xl shadow-2xl transform group-hover:scale-[1.02] transition duration-300">
+              </div>
+            </div>
+            <div class="w-full md:w-7/12 lg:w-8/12">
+              <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-red-100">
+                <h3 class="text-3xl md:text-4xl font-display mb-4 text-red-700">Sylus 🌙</h3>
+                <p class="text-lg md:text-xl text-gray-700 leading-relaxed font-body italic">
+                  "You sleep beneath the stars and wake a city in slumber. Don't you see? This is exactly what your heart truly desires: a night filled with warmth, games, and celebration with me by your side. Happy birthday, beautiful – close your eyes and dream of the adventures to come."
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Character 3 -->
-        <div class="flex flex-col md:flex-row items-center gap-8" data-aos="fade-right" data-aos-duration="1000">
-          <div class="w-full md:w-5/12">
-            <img src="https://i.imgur.com/CHARACTER3_ID.png" alt="Character 3" class="w-full h-96 object-contain rounded-lg shadow-2xl transform hover:scale-105 transition duration-300">
-          </div>
-          <div class="w-full md:w-7/12 text-center md:text-left">
-            <h3 class="text-3xl font-anime text-sakura mb-4">Xavier</h3>
-            <div class="bg-white p-6 rounded-lg shadow-xl relative">
-              <div class="absolute -left-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-white hidden md:block"></div>
-              <p class="text-xl italic">“I don’t usually celebrate things like this. But for you… I made an exception. May your wishes drift somewhere they can’t be lost.”</p>
+          <!-- Character 3 - Xavier -->
+          <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10" data-aos="fade-right">
+            <div class="w-full md:w-5/12 lg:w-4/12">
+              <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition"></div>
+                <img src="https://i.imgur.com/CHARACTER3_ID.png" alt="Xavier" class="relative w-full aspect-[3/4] object-cover rounded-2xl shadow-2xl transform group-hover:scale-[1.02] transition duration-300">
+              </div>
+            </div>
+            <div class="w-full md:w-7/12 lg:w-8/12">
+              <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-blue-100">
+                <h3 class="text-3xl md:text-4xl font-display mb-4 text-blue-700">Xavier ⭐</h3>
+                <p class="text-lg md:text-xl text-gray-700 leading-relaxed font-body italic">
+                  "Even as the night grows long, remember, my light only shines over you. I'm here to stand vigil by your side. If anything troubles you tonight, know I won't leave – I'll stay with you until dawn, in your dreams and reality. Happy birthday."
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Character 4 -->
-        <div class="flex flex-col md:flex-row-reverse items-center gap-8" data-aos="fade-left" data-aos-duration="1000">
-          <div class="w-full md:w-5/12">
-            <img src="https://i.imgur.com/CHARACTER4_ID.png" alt="Character 4" class="w-full h-96 object-contain rounded-lg shadow-2xl transform hover:scale-105 transition duration-300">
-          </div>
-          <div class="w-full md:w-7/12 text-center md:text-right">
-            <h3 class="text-3xl font-anime text-sakura mb-4">Caleb</h3>
-            <div class="bg-white p-6 rounded-lg shadow-xl relative">
-              <div class="absolute -right-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white hidden md:block"></div>
-              <p class="text-xl italic">“Hard work, patience, heart… you’ve got all three. Keep going. You’re on the right path.”</p>
+          <!-- Character 4 - Caleb -->
+          <div class="flex flex-col md:flex-row-reverse items-center gap-6 md:gap-10" data-aos="fade-left">
+            <div class="w-full md:w-5/12 lg:w-4/12">
+              <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-orange-600 to-yellow-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition"></div>
+                <img src="https://i.imgur.com/CHARACTER4_ID.png" alt="Caleb" class="relative w-full aspect-[3/4] object-cover rounded-2xl shadow-2xl transform group-hover:scale-[1.02] transition duration-300">
+              </div>
+            </div>
+            <div class="w-full md:w-7/12 lg:w-8/12">
+              <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-orange-100">
+                <h3 class="text-3xl md:text-4xl font-display mb-4 text-orange-700">Caleb 🔥</h3>
+                <p class="text-lg md:text-xl text-gray-700 leading-relaxed font-body italic">
+                  "Happy birthday, friend. You work so hard, so tonight let me carry some of that weight. Gravity starts and ends with you – you keep me grounded. Now relax and enjoy yourself; I'm proud of you, and I'll always be here whenever you need me."
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Character 5 -->
-        <div class="flex flex-col md:flex-row items-center gap-8" data-aos="fade-right" data-aos-duration="1000">
-          <div class="w-full md:w-5/12">
-            <img src="https://i.imgur.com/CHARACTER5_ID.png" alt="Character 5" class="w-full h-96 object-contain rounded-lg shadow-2xl transform hover:scale-105 transition duration-300">
-          </div>
-          <div class="w-full md:w-7/12 text-center md:text-left">
-            <h3 class="text-3xl font-anime text-sakura mb-4">Rafyl</h3>
-            <div class="bg-white p-6 rounded-lg shadow-xl relative">
-              <div class="absolute -left-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-white hidden md:block"></div>
-              <p class="text-xl italic">“You’ve got sharp instincts — and the nerve to trust them. That’s not common.”</p>
+          <!-- Character 5 - Rafyl -->
+          <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10" data-aos="fade-right">
+            <div class="w-full md:w-5/12 lg:w-4/12">
+              <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-teal-600 to-green-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition"></div>
+                <img src="https://i.imgur.com/CHARACTER5_ID.png" alt="Rafyl" class="relative w-full aspect-[3/4] object-cover rounded-2xl shadow-2xl transform group-hover:scale-[1.02] transition duration-300">
+              </div>
+            </div>
+            <div class="w-full md:w-7/12 lg:w-8/12">
+              <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-teal-100">
+                <h3 class="text-3xl md:text-4xl font-display mb-4 text-teal-700">Rafyl 🌊</h3>
+                <p class="text-lg md:text-xl text-gray-700 leading-relaxed font-body italic">
+                  "Heh, pulling all-nighters again? You're lucky I like chaos as much as you do. If anyone tries to steal your thunder or grab your loot, I'll just ask them, 'Who said you could touch her?' and send them packing. You've been my tranquil sea, and I'll weather any storm for you. Now go prove that birthday high score – I've got your six."
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Character 6 -->
-        <div class="flex flex-col md:flex-row-reverse items-center gap-8" data-aos="fade-left" data-aos-duration="1000">
-          <div class="w-full md:w-5/12">
-            <img src="https://i.imgur.com/CHARACTER6_ID.png" alt="Character 6" class="w-full h-96 object-contain rounded-lg shadow-2xl transform hover:scale-105 transition duration-300">
-          </div>
-          <div class="w-full md:w-7/12 text-center md:text-right">
-            <h3 class="text-3xl font-anime text-sakura mb-4">Aventurine</h3>
-            <div class="bg-white p-6 rounded-lg shadow-xl relative">
-              <div class="absolute -right-4 top-6 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white hidden md:block"></div>
-              <p class="text-xl italic">“Happy Birthday! Another year older, another year proving the odds love you. Careful — people might start accusing you of cheating.”</p>
+          <!-- Character 6 - Aventurine -->
+          <div class="flex flex-col md:flex-row-reverse items-center gap-6 md:gap-10" data-aos="fade-left">
+            <div class="w-full md:w-5/12 lg:w-4/12">
+              <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-yellow-600 to-amber-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition"></div>
+                <img src="https://i.imgur.com/CHARACTER6_ID.png" alt="Aventurine" class="relative w-full aspect-[3/4] object-cover rounded-2xl shadow-2xl transform group-hover:scale-[1.02] transition duration-300">
+              </div>
+            </div>
+            <div class="w-full md:w-7/12 lg:w-8/12">
+              <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-xl border border-yellow-100">
+                <h3 class="text-3xl md:text-4xl font-display mb-4 text-yellow-700">Aventurine 🎰</h3>
+                <p class="text-lg md:text-xl text-gray-700 leading-relaxed font-body italic">
+                  "Happy Birthday! Another year older, another year proving the odds love you. Careful — people might start accusing you of cheating."
+                </p>
+              </div>
             </div>
           </div>
+
         </div>
+      </section>
 
-      </div>
-    </section>
+      <!-- Final Section -->
+      <section class="py-16 md:py-24 text-center" data-aos="zoom-in">
+        <div class="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-12 md:p-16 rounded-3xl shadow-2xl">
+          <h2 class="text-4xl md:text-6xl font-display mb-6 text-white">Make This Year Legendary! 🌟</h2>
+          <p class="text-xl md:text-2xl text-white/90 font-body">Wishing you all the adventures, happiness, and amazing moments ahead!</p>
+        </div>
+      </section>
 
-    <!-- Final Section -->
-    <section class="my-16 md:my-24 text-center" data-aos="fade-up">
-      <h2 class="text-4xl md:text-5xl font-anime text-sakura mb-8">Make This Year Legendary! 🌟</h2>
-      <p class="text-2xl">Wishing you all the adventures, happiness, and amazing moments ahead!</p>
-    </section>
-
+    </div>
   </main>
 
   <!-- Footer -->
-  <footer class="bg-navy text-white p-8 text-center">
-    <p class="text-xl">Enjoy your day to the fullest! 🎂✨</p>
-    <p class="text-sm opacity-70 mt-2">Made with ❤️ for an amazing friend</p>
+  <footer class="bg-gradient-to-r from-purple-900 via-pink-900 to-blue-900 text-white py-12 mt-20">
+    <div class="container mx-auto text-center">
+      <p class="text-xl font-body mb-2">Enjoy your day to the fullest! 🎂✨</p>
+      <p class="text-sm opacity-70 font-body">Made with 💜 for an amazing friend</p>
+    </div>
   </footer>
 
   <!-- AOS Animation Script -->
