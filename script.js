@@ -12,38 +12,65 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Background Music Player ---
     const musicToggle = document.getElementById('music-toggle');
     const musicIcon = document.getElementById('music-icon');
-    const musicText = document.getElementById('music-text');
     const backgroundMusic = document.getElementById('background-music');
-    let isPlaying = false;
+    let isPlaying = true; // Start as playing since we have autoplay
 
     if (musicToggle && backgroundMusic) {
-        musicToggle.addEventListener('click', function() {
+        // Set initial volume
+        backgroundMusic.volume = 0.3;
+
+        // Try to autoplay on page load
+        const tryAutoplay = () => {
+            const playPromise = backgroundMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        musicIcon.textContent = '🎵';
+                        isPlaying = true;
+                    })
+                    .catch(error => {
+                        console.log('Autoplay prevented. User interaction needed.');
+                        musicIcon.textContent = '🔇';
+                        isPlaying = false;
+                    });
+            }
+        };
+
+        // Try autoplay
+        tryAutoplay();
+
+        // Also try on first user interaction
+        document.addEventListener('click', function firstClick() {
+            if (!isPlaying) {
+                tryAutoplay();
+            }
+            document.removeEventListener('click', firstClick);
+        }, { once: true });
+
+        // Toggle on button click
+        musicToggle.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent triggering the first click listener
+            
             if (isPlaying) {
                 backgroundMusic.pause();
                 musicIcon.textContent = '🔇';
-                musicText.textContent = 'Play Music';
                 isPlaying = false;
             } else {
-                // Attempt to play
                 const playPromise = backgroundMusic.play();
                 
                 if (playPromise !== undefined) {
                     playPromise
                         .then(() => {
                             musicIcon.textContent = '🎵';
-                            musicText.textContent = 'Pause Music';
                             isPlaying = true;
                         })
                         .catch(error => {
                             console.log('Playback prevented:', error);
-                            alert('Click again to play music! (Browser autoplay policy)');
                         });
                 }
             }
         });
-
-        // Set initial volume
-        backgroundMusic.volume = 0.3;
     }
 
     // --- Smooth Scroll Fix ---
